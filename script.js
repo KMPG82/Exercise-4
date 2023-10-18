@@ -1,5 +1,5 @@
 // https://jsonplaceholder.typicode.com/guide/
-async function downloadPosts(page = 1) {
+async function downloadPosts(page = 5) {
   const postsURL = `https://jsonplaceholder.typicode.com/posts?_page=${page}`;
   const response = await fetch(postsURL);
   const articles = await response.json();
@@ -25,13 +25,6 @@ function getArticleId(comments) {
   const data = article.dataset;
   return data.postId;
 }
-
-
-
-
-
-
-
 
 const posts = await downloadPosts();
 const comments = await downloadComments(1);
@@ -75,7 +68,7 @@ function SetH2Content() {
 }
 SetH2Content();
 
-//Create an <aside> and fill in the <span> by calling getUserName() and passing the userId field.
+//create aside tag in article tag
 console.log(article);
 function SetAsideInArticle() {
   let aside = '<aside> </aside';
@@ -86,6 +79,7 @@ function SetAsideInArticle() {
 }
 SetAsideInArticle();
 
+//create span tag in aside tag
 const aside = document.querySelectorAll('aside');
 console.log(aside);
 function SetSpanInAside() {
@@ -97,6 +91,7 @@ function SetSpanInAside() {
 }
 SetSpanInAside();
 
+//set username in span tag
 const span = document.querySelectorAll('span');
 console.log(span);
 for (let i = 0; i < span.length; i++) {
@@ -105,7 +100,7 @@ for (let i = 0; i < span.length; i++) {
   span[i].innerText += username;
 }
 
-//Create the <p> tag by replacing "\n" characters with <br> tags.
+//create p tag in article tag
 function SetPInArticle() {
   for (let i = 0; i < article.length; i++) {
     article[i].innerHTML += '<p></p>';
@@ -116,6 +111,7 @@ SetPInArticle()
 const p = document.querySelectorAll('p');
 console.log(p);
 
+//set content for p tag and replace "\n" characters with br tags
 function SetContentInP() {
   let paragrah = '';
   for (let i = 1; i < p.length; i++) {
@@ -126,6 +122,7 @@ function SetContentInP() {
 }
 SetContentInP()
 
+//create summary tag in details tag
 const detailsTag = document.querySelectorAll('details');
 console.log(detailsTag);
 function AddSummaryInDetails() {
@@ -135,6 +132,7 @@ function AddSummaryInDetails() {
 }
 AddSummaryInDetails()
 
+//create section tag in details tag
 function AddSectionInDetails() {
   for (let i = 0; i < detailsTag.length; i++) {
     detailsTag[i].innerHTML += '<section> </section>';
@@ -142,6 +140,7 @@ function AddSectionInDetails() {
 }
 AddSectionInDetails();
 
+//create header tag in section tag
 const section = document.querySelectorAll('section');
 console.log(section);
 function SetHearderInSection() {
@@ -151,6 +150,7 @@ function SetHearderInSection() {
 }
 SetHearderInSection()
 
+//set h3 tag in header tag
 const header = document.querySelectorAll('header');
 console.log(header);
 function SetH3InHeader() {
@@ -160,15 +160,8 @@ function SetH3InHeader() {
 }
 SetH3InHeader()
 
-/* function AddAsidesInDetails() {
-  for (let i = 0; i < section.length; i++) {
-    for (let j = 0; j < 5; j++) {
-      section[i].innerHTML += '<aside> </aside>';
-    }
-  }
-}
-AddAsidesInDetails() */
-
+//event listener for details tag
+let remainder = 0;
 const details = document.getElementsByTagName("details");
 console.log(details);
 for (let detail of details) {
@@ -177,20 +170,27 @@ for (let detail of details) {
       const asides = detail.getElementsByTagName("aside");
       console.log(asides);
       const commentsWereDownloaded = asides.length > 0;
+
       if (!commentsWereDownloaded) {
         const articleId = getArticleId(detail);
         const comments = await downloadComments(articleId);
         console.log(comments);
+        console.log(articleId);
 
-        for (let i = 0; i < section.length; i++) {
-          for (let j = 0; j < comments.length; j++) {
-            section[i].innerHTML += `<aside><p> ${comments[j].body.replaceAll('\n', '<br/>')} </p> <p><small> ${comments[j].name.replaceAll('\n', '<br/>')} </small></p></aside>`;
-          }
-          console.log(detail);
+        remainder = (articleId % 10) - 1;
+        console.log(remainder);
+
+        if (remainder == -1) {
+          remainder = 9;
         }
+        console.log(remainder);
+
+
+        for (let j = 0; j < comments.length; j++) {
+          section[remainder].innerHTML += `<aside><p> ${comments[j].body.replaceAll('\n', '<br/>')} </p> <p><small> ${comments[j].name.replaceAll('\n', '<br/>')} </small></p></aside>`;
+        }
+        console.log(section[remainder]);
       }
     }
   });
 }
-
-console.log(section);
