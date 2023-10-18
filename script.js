@@ -37,8 +37,7 @@ function SetArticleInMain() {
   let articles = "";
 
   for (let i = 0; i < posts.length; i++) {
-    articles = `<article data-post-id= ${posts[i].id}></article>`;
-    main.innerHTML += articles;
+    main.innerHTML += `<article data-post-id= ${posts[i].id}></article>`;
     main.innerHTML += '<details> </details>'
   }
 
@@ -49,9 +48,8 @@ SetArticleInMain();
 const article = document.querySelectorAll('article')
 console.log(article)
 function SetHeaderInArticle() {
-  let headers = "<h2> </h2>";
   for (let i = 0; i < article.length; i++) {
-    article[i].innerHTML += headers
+    article[i].innerHTML += '<h2> </h2>';
   }
 }
 SetHeaderInArticle();
@@ -69,10 +67,8 @@ SetH2Content();
 //create aside tag in article tag
 console.log(article);
 function SetAsideInArticle() {
-  let aside = '<aside> </aside';
-
   for (let i = 0; i < article.length; i++) {
-    article[i].innerHTML += aside;
+    article[i].innerHTML += '<aside> </aside';
   }
 }
 SetAsideInArticle();
@@ -81,10 +77,8 @@ SetAsideInArticle();
 const aside = document.querySelectorAll('aside');
 console.log(aside);
 function SetSpanInAside() {
-  let span = '<span class="author"> </span';
-
   for (let i = 0; i < aside.length; i++) {
-    aside[i].innerHTML += span;
+    aside[i].innerHTML += '<span class="author"> </span';
   }
 }
 SetSpanInAside();
@@ -101,7 +95,7 @@ for (let i = 0; i < span.length; i++) {
 //create p tag in article tag
 function SetPInArticle() {
   for (let i = 0; i < article.length; i++) {
-    article[i].innerHTML += '<p></p>';
+    article[i].innerHTML += '<p> </p>';
   }
 }
 SetPInArticle()
