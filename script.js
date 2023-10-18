@@ -31,8 +31,6 @@ const comments = await downloadComments(1);
 console.log(posts);
 console.log(comments);
 
-
-
 //setting the article tags in main tag
 const main = document.querySelector('main')
 function SetArticleInMain() {
