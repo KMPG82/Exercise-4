@@ -34,8 +34,6 @@ console.log(comments);
 //setting the article tags in main tag
 const main = document.querySelector('main')
 function SetArticleInMain() {
-  let articles = "";
-
   for (let i = 0; i < posts.length; i++) {
     main.innerHTML += `<article data-post-id= ${posts[i].id}></article>`;
     main.innerHTML += '<details> </details>'
